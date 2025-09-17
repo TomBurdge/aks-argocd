@@ -1,0 +1,46 @@
+name: "Terragrunt GitHub Actions"
+on:
+  - pull_request
+
+jobs:
+  terragrunt:
+    runs-on: ubuntu-latest
+    env:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+
+      # https://github.com/marketplace/actions/install-azure-cli
+      - uses: pietrobolcato/install-azure-cli-action@main
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+      #   with:
+      #     cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      # Assuming you have a mise.toml file in your repository.
+      # - name: Install Terragrunt and OpenTofu
+      #   uses: gruntwork-io/terragrunt-action@v3
+      # Note: no tg_command specified, so terragrunt won't be executed
+
+      # If you don't have a mise.toml file in your repository, you can specify tool version directly.
+      - name: Install Terragrunt and OpenTofu
+        uses: gruntwork-io/terragrunt-action@v3
+        with:
+          tg_version: "0.87.2"
+          # tf_path: "terraform"
+          tofu_version: "1.8.4"
+
+      - name: Run terragrunt plan
+        run: |
+          cd live/dev/
+          terragrunt plan --all
+
+      - name: Run terragrunt apply
+        run: |
+          cd live/dev/
+          terragrunt run --all --non-interactive apply
