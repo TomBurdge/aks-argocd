@@ -59,8 +59,8 @@ points.
 
 ## 1.4 Deploying the resources
 
-* With terragrunt, you can deploy all from a child of the root.
-* To simply run locally:
+* With terragrunt, you can deploy all the modules at once.
+* To run locally:
 
 ```bash
 az login
