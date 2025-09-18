@@ -150,8 +150,8 @@ Then copy the IP from the table into the browser: `http:0.123.45.67`
 
 * There is `prometheus-stack` release in the `archive` directory which can be moved to `live/dev` and to deploy the task.
 * The example in `archive` uses a `helm_release` rather than an application via ArgoCD, but this would be straightforward to implement with another chart in `charts` and another call of the `argo-application` module.
-* I favoured using a module that tags advantage of Azure's built-in support for managed Prometheus & Grafana.
-* The benefit of these is that you can (quite easily) configure access to Grafana and service it via the Azure portal and Azure RBAC.
+* I favoured using a module that takes advantage of Azure's built-in support for managed Prometheus & Grafana.
+* The benefit of these is that you can (quite easily) configure access to Grafana with azure RBAC and serve it via the Azure portal.
 
 ---
 
