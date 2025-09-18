@@ -8,6 +8,8 @@ The below is a in-terminal demo of ArgoCD syncing a change from the helm chart d
 
 ![ArgoCD sync screen record](./images/demo.gif "Screen Record")
 
+Argo CD orchestrates creation of a new pod auto-magically when I push an increase of replicaCount in the associated helm chart to the main branch.
+
 ---
 
 ## Table of Contents
