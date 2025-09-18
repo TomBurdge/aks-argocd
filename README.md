@@ -205,4 +205,5 @@ kubectl port-forward svc/argocd-server -n argocd 8080:80---
 * You can use the string printed to console as the password, and the username is `admin`.
 
 ---
+![ArgoCD UI Screenshot](./images/argo-cd-ui-screenshot.png "ArgoCD UI Screenshot")
 
