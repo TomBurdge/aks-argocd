@@ -174,7 +174,7 @@ But here we can see the memory up and down that is the signature of a garbage co
 
 ## 3 Short demo
 
-![ArgoCD sync screen record](.images/demo.gif "Screen Record")
+![ArgoCD sync screen record](./images/demo.gif "Screen Record")
 
 ---
 Finally, we can check that the ArgoCD works with GitOps by committing and pushing an update to the helm chart.
@@ -187,7 +187,7 @@ ArgoCD is deployed with the (preview) [Azure ArgoCD extension](https://learn.mic
 
 * Change the `charts/guestbook/values.yaml` to have 2 rather than one replicas.
 * Commit and push the change to the repo's main branch.
-* Look at the namespace in k9s do see a pod spinning up or run `kubectl get pod -n demo`
+* Look at the namespace in k9s to see a pod spinning up or run `kubectl get pod -n demo`
 
 ---
 
@@ -205,4 +205,4 @@ kubectl port-forward svc/argocd-server -n argocd 8080:80---
 * You can use the string printed to console as the password, and the username is `admin`.
 
 ---
-![ArgoCD sync screen record](./images/demo.gif "Screen Record")
+
