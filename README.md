@@ -40,7 +40,9 @@ chmod +x ./scripts/register-extensions.sh
 * [terragrunt](https://terragrunt.gruntwork.io/docs/getting-started/install/)
 * Optional: [k9s](https://github.com/derailed/k9s) for monitoring the cluster in terminal.
 * Optional: [mask](https://github.com/jacobdeichert/mask) for running commands (like Make but in markdown and easier to use).
-Installation instructions linked in the bullet points.
+
+Installation instructions linked in the bullet 
+points.
 
 ---
 
