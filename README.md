@@ -21,7 +21,7 @@ The below is a in-terminal demo of ArgoCD syncing a change from the helm chart d
 ## 1.1 Azure subscription assumptions
 
 * These resources are deployed to Microsoft Azure with AKS.
-* To deploy these resources, various required providers are needed.
+* To deploy these resources, various providers must first be registered on the azure subscription.
 * There is a helper script in `scripts/grant-cluster-access.sh` which can be run in Linux with...
 
 ---
