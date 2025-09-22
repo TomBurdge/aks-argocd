@@ -47,7 +47,7 @@ chmod +x ./scripts/register-extensions.sh
 * Optional: [k9s](https://github.com/derailed/k9s) for monitoring the cluster in terminal.
 * Optional: [mask](https://github.com/jacobdeichert/mask) for running commands (like Make but in markdown and easier to use).
 
-Installation instructions linked in the bullet 
+Installation instructions linked in the bullet
 points.
 
 ---
@@ -213,3 +213,53 @@ kubectl port-forward svc/argocd-server -n argocd 8080:80---
 ---
 ![ArgoCD UI Screenshot](./images/argo-cd-ui-screenshot.png "ArgoCD UI Screenshot")
 
+---
+
+## Run Through
+
+Bottom-up:
+
+* `_modules/`: just go through them quickly. Briefly mentioned the providers used.
+* `charts/`: Quite straightforward. Just a `helm template` command pointing at the `guestbook` docker image.
+  * Mention again that `archive` contains the helm template for `prometheus-stack` (did complete the task).
+* `live`:
+  * `terragrunt`: orchestrator for terraform (solves the single apply problem)
+  * Briefly mention the DAG (I can see it from memory)
+
+---
+
+# Reflections
+
+---
+
+## What went well
+
+* Single terraform apply. Benefit: fewer steps for developers to complete.
+* Use of azure managed services (ArgoCD, Grafana). Benefit: use of managed services leads to (on aggregate) lower total cost of ownership.
+* I like how the TUI demo looks. :)
+
+---
+
+## What I would refactor/change with more time
+
+* I took the opportunity to write some tests in some of the `_modules`. I moved on, as it wasn't asked for in the task, but it would be essential for a live infra projectj to have a github action for some basic testing on a PR.
+* I knew how to do the https serving bonus but skipped it due to time (blog post linked above).
+* Removing some of the subscription hard-coding in the providers would be needed for multiple envs (this is relatively straightforward in terragrunt by registering the azurerm provider in the `root.hcl` with an environment switch).
+
+---
+
+## What I would refactor/change with more time
+
+* There was more scope for configuring some custom dashboards (I realised after sticking to managed grafana that a custom dashboard would have been a little easier with a helm-native ArgoCD type workflow).
+* AKS configuration on a private network  is much more complicated (and necessary in an enterprise setting). Not explicitly requested in task. I feel comfortable doing this type of work, it just takes longer:
+  * ArgoCD syncing to a project
+  * Application Gateway for secure serving
+  * Subnets/vnet with right type of configs for any private endpoints ()
+* Terragrunt is good for scaffolding code with `.boilerplate/` files in the modules rather than creating the `terragrunt.hcl` file oneself. You can `scaffold` the code with `terragrunt scaffold` (we use this with `just`) or `backstage`. Not needed for this small project, but becomes important in larger projects with terragrunt because terragrunt leans toward being so modular.
+
+---
+
+## Questions
+
+* I did a single apply with terragrunt. Is/how is a single apply possible with terraform?
+* The provider auth is only known after apply of the aks, so it  seemed to me that configuring the kubernetes/helm terraform provider without the AKS deployed yet would be quite a challenge.
